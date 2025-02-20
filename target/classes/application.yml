@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/inventory_db
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+kafka:
+  bootstrap-servers: localhost:9092
+  topic:
+    inventory-updates: inventory-updates
+
+logging:
+  level:
+    org.springframework.kafka: DEBUG

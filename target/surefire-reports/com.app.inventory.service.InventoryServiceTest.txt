@@ -1,0 +1,22 @@
+-------------------------------------------------------------------------------
+Test set: com.app.inventory.service.InventoryServiceTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.998 s <<< FAILURE! -- in com.app.inventory.service.InventoryServiceTest
+com.app.inventory.service.InventoryServiceTest.testSave -- Time elapsed: 0.126 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting actual not to be null
+	at com.app.inventory.service.InventoryServiceTest.testSave(InventoryServiceTest.java:20)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+com.app.inventory.service.InventoryServiceTest.testUpdate -- Time elapsed: 0 s <<< FAILURE!
+java.lang.AssertionError: 
+
+Expecting actual not to be null
+	at com.app.inventory.service.InventoryServiceTest.testUpdate(InventoryServiceTest.java:34)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+

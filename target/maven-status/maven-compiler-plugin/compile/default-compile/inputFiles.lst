@@ -1,0 +1,7 @@
+C:\Users\Administrator\Documents\inventory-service\src\main\java\com\app\inventory\InventoryServiceApplication.java
+C:\Users\Administrator\Documents\inventory-service\src\main\java\com\app\inventory\entity\InventoryItem.java
+C:\Users\Administrator\Documents\inventory-service\src\main\java\com\app\inventory\model\Inventory.java
+C:\Users\Administrator\Documents\inventory-service\src\main\java\com\app\inventory\repository\InventoryItemRepository.java
+C:\Users\Administrator\Documents\inventory-service\src\main\java\com\app\inventory\service\KafkaProducerService.java
+C:\Users\Administrator\Documents\inventory-service\src\main\java\com\app\inventory\service\InventoryService.java
+C:\Users\Administrator\Documents\inventory-service\src\main\java\com\app\inventory\controller\InventoryController.java
