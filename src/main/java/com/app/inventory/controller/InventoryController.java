@@ -16,6 +16,13 @@ import org.springframework.http.ResponseEntity;
 import com.app.inventory.service.*;
 import com.app.inventory.entity.InventoryItem;
 
+import java.util.List;
+import java.util.UUID;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Max;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 @RestController
 @RequestMapping("/api/v1/inventory")
@@ -43,5 +50,21 @@ public class InventoryController {
     public ResponseEntity<Void> deleteItem(@PathVariable Long id) {
         inventoryService.deleteItem(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/stock")
+    public ResponseEntity<InventoryItem> updateStock(
+            @PathVariable UUID id,
+            @RequestParam @Min(-1000) @Max(1000) int delta
+    ) {
+        return ResponseEntity.ok(inventoryService.updateStock(id, delta));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<InventoryItem>> searchItems(
+            @RequestParam String sku,
+            @RequestParam(defaultValue = "0") int page
+    ) {
+        return ResponseEntity.ok(inventoryService.searchBySku(sku, page));
     }
 }

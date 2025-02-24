@@ -1,7 +1,0 @@
-com\app\inventory\service\InventoryService.class
-com\app\inventory\repository\InventoryItemRepository.class
-com\app\inventory\service\KafkaProducerService.class
-com\app\inventory\InventoryServiceApplication.class
-com\app\inventory\model\Inventory.class
-com\app\inventory\entity\InventoryItem.class
-com\app\inventory\controller\InventoryController.class
