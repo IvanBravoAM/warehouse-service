@@ -1,3 +1,5 @@
+package com.app.inventory.model;
+
 import java.time.Instant;
 
 public class ErrorResponse {

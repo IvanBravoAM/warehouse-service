@@ -1,39 +1,55 @@
 package com.app.inventory.service;
 
 import com.app.inventory.entity.InventoryItem;
+import com.app.inventory.exception.ItemNotFoundException;
+import com.app.inventory.model.InventoryEvent;
 import com.app.inventory.repository.InventoryItemRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.kafka.core.KafkaTemplate;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
+import com.app.inventory.repository.InventoryItemRepository;
 
+import java.util.Optional;
+import java.util.UUID;
+// InventoryServiceTest.java
+@ExtendWith(MockitoExtension.class)
 class InventoryServiceTest {
-
-    private final InventoryItemRepository repository = mock(InventoryItemRepository.class);
-    private final InventoryService service = new InventoryService(repository);
+    @Mock
+    private InventoryItemRepository inventoryRepository;
+    @Mock
+    private KafkaTemplate<String, InventoryEvent> kafkaTemplate;
+    @InjectMocks
+    private InventoryService inventoryService;
 
     @Test
-    void testSave() {
-        // InventoryItem item = new InventoryItem("Widget", 10, 15.5);
-        // when(repository.save(item)).thenReturn(new InventoryItem("Widget", 10, 15.5));
+    void updateStock_WhenItemExists_UpdatesStockAndPublishesEvent() {
+        UUID itemId = UUID.randomUUID();
+        InventoryItem item = new InventoryItem(itemId, "Laptop", 7, 10);
+        when(inventoryRepository.findById(itemId)).thenReturn(Optional.of(item));
 
-        // InventoryItem response = service.save(item);
-        // assertThat(response.getId()).isEqualTo(1L);
-        // assertThat(response.getName()).isEqualTo("Widget");
-        // assertThat(response.getQuantity()).isEqualTo(10);
-        // assertThat(response.getPrice()).isEqualTo(15.5);
+        InventoryItem updatedItem = inventoryService.updateStock(itemId, 5);
+
+        assertEquals(12, updatedItem.getQuantity());
+        verify(kafkaTemplate).send(eq("inventory-updates"), any(InventoryEvent.class));
     }
 
     @Test
-    void testUpdate() {
-        // InventoryItem existingItem = new InventoryItem("Widget", 10, 15.5);
-        // InventoryItem updatedItem = new InventoryItem("Updated Widget", 20, 25.5);
-        // when(repository.findById(1L)).thenReturn(java.util.Optional.of(existingItem));
-        // when(repository.save(existingItem)).thenReturn(new InventoryItem("Updated Widget", 20, 25.5));
+    void getItemById_WhenItemDoesNotExist_ThrowsException() {
+        UUID nonExistentId = UUID.randomUUID();
+        when(inventoryRepository.findById(nonExistentId)).thenReturn(Optional.empty());
 
-        // InventoryItem response = service.update(1L, updatedItem);
-        // assertThat(response.getId()).isEqualTo(1L);
-        // assertThat(response.getName()).isEqualTo("Updated Widget");
-        // assertThat(response.getQuantity()).isEqualTo(20);
-        // assertThat(response.getPrice()).isEqualTo(25.5);
+        assertThrows(ItemNotFoundException.class, () -> {
+            inventoryService.getItemById(nonExistentId);
+        });
     }
 }

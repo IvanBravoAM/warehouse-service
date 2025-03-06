@@ -1,10 +1,10 @@
+package com.app.inventory.exception;
 
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import com.app.inventory.model.ErrorResponse;
 
 import java.time.Instant;
@@ -18,9 +18,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ItemNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleItemNotFound(ItemNotFoundException ex) {
         ErrorResponse response = new ErrorResponse(
-                "ITEM_NOT_FOUND",
-                ex.getMessage(),
-                Instant.now()
+            "ITEM_NOT_FOUND",
+            ex.getMessage(),
+            Instant.now()
         );
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }

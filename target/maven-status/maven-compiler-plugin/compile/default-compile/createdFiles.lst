@@ -1,0 +1,13 @@
+com\app\inventory\config\SecurityConfig.class
+com\app\inventory\service\InventoryService.class
+com\app\inventory\config\KafkaProducerConfig.class
+com\app\inventory\model\Inventory.class
+com\app\inventory\model\ErrorResponse.class
+com\app\inventory\repository\InventoryItemRepository.class
+com\app\inventory\service\KafkaProducerService.class
+com\app\inventory\exception\ItemNotFoundException.class
+com\app\inventory\InventoryServiceApplication.class
+com\app\inventory\model\InventoryEvent.class
+com\app\inventory\entity\InventoryItem.class
+com\app\inventory\exception\GlobalExceptionHandler.class
+com\app\inventory\controller\InventoryController.class

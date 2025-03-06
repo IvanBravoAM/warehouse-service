@@ -1,1 +1,3 @@
 com\app\inventory\service\InventoryServiceTest.class
+com\app\inventory\integration\InventoryIntegrationTest.class
+com\app\inventory\controller\InventoryControllerTest.class

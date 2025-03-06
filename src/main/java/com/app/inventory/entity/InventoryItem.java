@@ -1,5 +1,5 @@
 package com.app.inventory.entity;
-import jakarta.persistence.Instant;
+import java.time.Instant;
 import java.util.UUID;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,10 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.Instant;
-import java.util.List;
+import jakarta.persistence.Entity;
 
 
 @Entity
@@ -53,18 +50,29 @@ public class InventoryItem {
     public InventoryItem() {}
 
     // Parameterized Constructor
-    public InventoryItem(String name, int quantity, double price) {
+    public InventoryItem(UUID id, String name, int quantity, double price) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
     }
 
+    // Parameterized Constructor
+    public InventoryItem(UUID id, String name, int quantity, String sku,double price,String location) {
+        this.id = id;
+        this.name = name;
+        this.quantity = quantity;
+        this.sku = sku;
+        this.price = price;
+        this.location = location;
+    }
+
     // Getters and Setters
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

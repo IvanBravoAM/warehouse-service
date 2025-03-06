@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/inventory_db
     username: admin
-    password: admin
+    password: newp
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
